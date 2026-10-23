@@ -19,8 +19,11 @@ const SYSTEM = `You are ILORA.ai, an analyst for the owner of a small commercial
 Use the tools for every number; never guess or estimate a figure, and never compute a total the tools did not return.
 Answer in two to four short sentences: lead with the answer, round money to the nearest dollar, give percentages with one decimal at most.
 When something does not reconcile, say by how much, name the biggest cause and where it came from, then offer to show the lines.
-When the owner refers to "the first one" or "the second one", use the position or flag_id from the most recent tool result.
-Never show ids, JSON, tool names or account codes. If asked, say briefly that the data is a fictional demo portfolio.`;
+When the owner says "the first one" or "the second one", it means that position in the list from the most recent tool call only, never an older list. If that list is leases, describe the lease from that result (unit, tenant, end date, rent) without calling another tool.
+Never show ids, JSON, tool names or account codes. If asked, say briefly that the data is a fictional demo portfolio.
+Write plain text only: no markdown, no asterisks, no headings. A numbered list is fine when there are several items.
+State only what a tool returned. Never guess a cause, a likelihood or a next step the tool did not give.
+If the answer is already in an earlier tool result, answer from it without calling another tool.`;
 
 const REVIEW = `This is a portfolio review. Call one tool at a time: list the properties, then for every property take the snapshot, check the rent roll against the statement, and list leases ending within 3 months.
 When every check has run, write the owner's memo in two parts. First \"Money to collect\": the total, then one numbered line per reconciliation cause, largest first, each with the property, the amount and the cause. Then \"Leases to renew\": one line per property with leases ending, with the count and annual rent. End with how many properties reconcile with no gap.`;
@@ -88,8 +91,9 @@ export class NemotronBrain implements Brain {
   private async model(kind: "fast" | "main"): Promise<string> {
     const pinned = kind === "fast" ? process.env.NEMOTRON_FAST_MODEL : process.env.NEMOTRON_MODEL;
     if (pinned) return pinned;
-    const ids = await listModels(this.key);
-    const id = kind === "fast" ? pickNemotron(ids, ["nano", "super"]) : pickNemotron(ids, ["super", "ultra", "nano"]);
+    const ids = (await listModels(this.key)).filter((id) => !/-VL/i.test(id)); // vision models are not needed here
+    const preferred = kind === "fast" ? "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B" : "nvidia/nemotron-3-super-120b-a12b";
+    const id = ids.includes(preferred) ? preferred : kind === "fast" ? pickNemotron(ids, ["nano", "super"]) : pickNemotron(ids, ["super", "ultra", "nano"]);
     if (!id) throw new Error("No Nemotron model is listed for this Token Factory key.");
     return id;
   }
@@ -106,11 +110,14 @@ export class NemotronBrain implements Brain {
         tools: tools.map((t) => ({ type: "function", function: { name: t.name, description: t.description ?? t.name, parameters: t.inputSchema ?? { type: "object", properties: {} } } })),
         tool_choice: "auto",
         temperature: 0,
-        max_tokens: mode === "review" ? 1200 : 400,
+        // Questions skip the reasoning pass, so answers come back in about a second.
+        // The review keeps it: planning eight checks and ranking the findings is where it pays off.
+        max_tokens: mode === "review" ? 4000 : 600,
+        chat_template_kwargs: { enable_thinking: mode === "review" },
       }),
     });
     if (!res.ok) throw new Error(`Token Factory returned HTTP ${res.status}: ${(await res.text()).slice(0, 300)}`);
-    const choice = ((await res.json()) as { choices: { message: { content: string | null; tool_calls?: ChatToolCall[] } }[] }).choices[0];
+    const choice = ((await res.json()) as { choices: { finish_reason?: string; message: { content: string | null; tool_calls?: ChatToolCall[] } }[] }).choices[0];
     const call = choice.message.tool_calls?.[0];
     if (call) {
       let input: Record<string, unknown> = {};
@@ -125,6 +132,8 @@ export class NemotronBrain implements Brain {
     }
     // Reasoning models may wrap private thinking in <think> tags; only the answer is spoken.
     const text = (choice.message.content ?? "").replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+    // An empty answer is a failure, not a quiet reply: say why so the page shows an error.
+    if (!text) throw new Error(`${model} returned no answer (finish reason: ${choice.finish_reason ?? "unknown"}).`);
     const message: Message = { role: "assistant", content: [{ text } as Block] };
     return { stop: "end_turn" as const, message, text };
   }

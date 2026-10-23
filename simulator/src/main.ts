@@ -110,20 +110,23 @@ async function ask(text: string, mode: "ask" | "review" = "ask") {
   busy = true;
   $("talk").setAttribute("disabled", "");
   addTurn("user", text);
-  messages.push({ role: "user", content: [{ text }] });
+  // A review starts from a clean slate so every check runs fresh, then joins the conversation for follow-ups.
+  const thread: Message[] = mode === "review" ? [] : messages;
+  thread.push({ role: "user", content: [{ text }] });
   const used: string[] = [];
   try {
     for (let step = 0; step < (mode === "review" ? 16 : 5); step++) {
       const reply = (await fetch("/api/brain", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode, messages, tools: tools.map((t) => ({ name: t.name, description: t.description, inputSchema: t.inputSchema })) }),
+        body: JSON.stringify({ mode, messages: thread, tools: tools.map((t) => ({ name: t.name, description: t.description, inputSchema: t.inputSchema })) }),
       }).then(async (r) => {
         if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error ?? `brain HTTP ${r.status}`);
         return r.json();
       })) as BrainReply;
-      messages.push(reply.message);
+      thread.push(reply.message);
       if (reply.stop === "end_turn") {
+        if (thread !== messages) messages.push(...thread);
         addTurn("analyst", reply.text, `${used.length ? `tools: ${used.join(", ")} · ` : ""}${reply.brain}`);
         speak(reply.text);
         return;
@@ -131,7 +134,7 @@ async function ask(text: string, mode: "ask" | "review" = "ask") {
       const t0 = performance.now();
       const result = (await client.callTool({ name: reply.toolUse.name, arguments: reply.toolUse.input })) as CallToolResult;
       used.push(`${reply.toolUse.name} ${Math.round(performance.now() - t0)} ms`);
-      messages.push({
+      thread.push({
         role: "user",
         content: [{ toolResult: { toolUseId: reply.toolUse.toolUseId, status: result.isError ? "error" : "success", content: [{ json: payloadOf(result) }] } }],
       });

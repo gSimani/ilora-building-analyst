@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ILORA.ai Building Analyst</title>
+    <meta name="description" content="ILORA.ai Building Analyst: ask about a commercial property's rent roll, income statement and leases, or run a full portfolio review. Runs on NVIDIA Nemotron through Nebius Token Factory. Demo data is fictional." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Tenor+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header id="top-bar">
+      <div id="brand">
+        <span id="brand-name">ILORA.ai</span>
+        <span id="brand-sub">Building Analyst · NVIDIA Nemotron on Nebius</span>
+      </div>
+      <div id="controls">
+        <label class="toggle" id="screen-toggle-wrap"><input type="checkbox" id="screen-toggle" checked /> Show visuals</label>
+        <label class="toggle" id="theme-toggle-wrap"><input type="checkbox" id="theme-toggle" /> Dark</label>
+        <button type="button" id="debug-toggle" class="quiet" aria-expanded="false" aria-controls="debug">Show MCP traffic</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <section id="device" aria-label="Conversation with ILORA.ai">
+        <div id="device-screen">
+          <div id="conversation" aria-live="polite"></div>
+          <div id="visual" aria-label="Visual answer"></div>
+          <div id="no-screen" hidden>
+            <p id="no-screen-title">Voice only</p>
+            <p id="no-screen-caption"></p>
+          </div>
+        </div>
+        <div id="review-bar">
+          <button type="button" id="review">Review my portfolio</button>
+          <span id="review-hint">Runs every check on every property, then writes your memo.</span>
+        </div>
+        <div id="ask-bar">
+          <button type="button" id="talk" aria-label="Hold to talk">Hold to talk</button>
+          <form id="type-form">
+            <label for="typed" class="sr-only">Type a question</label>
+            <input id="typed" autocomplete="off" placeholder="Or type a question" />
+          </form>
+        </div>
+        <div id="suggestions" aria-label="Demo questions"></div>
+      </section>
+
+      <aside id="debug" hidden aria-label="MCP traffic">
+        <div id="debug-head">
+          <h2 id="debug-title">MCP over Streamable HTTP</h2>
+          <p id="session-info"></p>
+        </div>
+        <ol id="wire"></ol>
+      </aside>
+    </main>
+
+    <footer id="foot">
+      <p id="foot-note">NVIDIA Nemotron chooses each check and writes the answer; every number comes from a checked tool, never from the model. All properties, tenants and figures are fictional.</p>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

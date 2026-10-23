@@ -1,0 +1,34 @@
+{
+  "lease_id": "coral-wren-plaza:104",
+  "property_id": "coral-wren-plaza",
+  "tenant_name": "Harbor Light Pilates",
+  "suite_unit": "104",
+  "premises_sf": 1800,
+  "commencement_date": "2025-03-01",
+  "expiration_date": "2032-02-29",
+  "base_rent_monthly": 4250,
+  "rent_schedule": [
+    {
+      "effective_date": "2025-03-01",
+      "base_rent_monthly": 2750
+    },
+    {
+      "effective_date": "2026-03-01",
+      "base_rent_monthly": 4250
+    }
+  ],
+  "source_document": "Lease, Suite 104, Harbor Light Pilates",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2025-03-01: $2,750 per month; Beginning 2026-03-01: $4,250 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2032-02-29."
+    }
+  ],
+  "notes": "Rent abatement ends February 28, 2026; full base rent of $4,250 per month starts March 1, 2026."
+}

@@ -1,0 +1,29 @@
+{
+  "lease_id": "coral-wren-plaza:111",
+  "property_id": "coral-wren-plaza",
+  "tenant_name": "Island Cuts Barbershop",
+  "suite_unit": "111",
+  "premises_sf": 1300,
+  "commencement_date": "2025-11-01",
+  "expiration_date": "2030-10-31",
+  "base_rent_monthly": 2500,
+  "rent_schedule": [
+    {
+      "effective_date": "2025-11-01",
+      "base_rent_monthly": 2500
+    }
+  ],
+  "source_document": "Lease, Suite 111, Island Cuts Barbershop",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2025-11-01: $2,500 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2030-10-31."
+    }
+  ]
+}

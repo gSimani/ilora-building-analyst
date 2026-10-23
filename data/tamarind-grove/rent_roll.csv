@@ -1,0 +1,49 @@
+unit_number,tenant_name,space_use,square_feet,lease_start,lease_end,contractual_rent,occupancy_status,source_document,source_page,source_line
+A-01,Alvarez household,1 bed,720,2025-06-01,2027-01-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,1
+A-02,Brooks household,1 bed,720,2025-06-01,2027-02-28,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,2
+A-03,Castillo household,1 bed,720,2025-06-01,2027-03-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,3
+A-04,Dunn household,1 bed,720,2025-06-01,2027-04-30,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,4
+A-05,Ellison household,1 bed,720,2025-06-01,2027-05-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,5
+A-06,Fontaine household,1 bed,720,2025-06-01,2027-06-30,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,6
+A-07,Garza household,1 bed,720,2025-06-01,2027-07-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,7
+A-08,Holt household,1 bed,720,2025-06-01,2027-08-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,8
+A-09,Ibarra household,1 bed,720,2025-06-01,2027-09-30,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,9
+A-10,Jansen household,1 bed,720,2025-06-01,2027-10-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,10
+A-11,Kowal household,1 bed,720,2025-06-01,2027-11-30,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,11
+A-12,Lindqvist household,1 bed,720,2025-06-01,2027-12-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,12
+A-13,Moreau household,1 bed,720,2025-06-01,2026-12-31,1850,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,13
+A-14,,1 bed,720,,,0,vacant,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,14
+A-15,,1 bed,720,,,0,vacant,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,15
+A-16,Pereira household,2 bed,980,2025-06-01,2027-03-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,16
+A-17,Quinlan household,2 bed,980,2025-06-01,2027-04-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,17
+A-18,Rasmussen household,2 bed,980,2025-06-01,2027-05-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,18
+A-19,Silva household,2 bed,980,2025-06-01,2027-06-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,19
+A-20,Thorne household,2 bed,980,2025-06-01,2027-07-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,20
+A-21,Underwood household,2 bed,980,2025-06-01,2027-08-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,21
+A-22,Vance household,2 bed,980,2025-06-01,2027-09-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,22
+A-23,Whitfield household,2 bed,980,2025-06-01,2027-10-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,23
+A-24,Xiong household,2 bed,980,2025-06-01,2027-11-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,24
+B-01,Yarrow household,2 bed,980,2025-06-01,2027-12-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,25
+B-02,Zeller household,2 bed,980,2025-06-01,2026-12-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,26
+B-03,Abernathy household,2 bed,980,2025-06-01,2027-01-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,27
+B-04,Bellamy household,2 bed,980,2025-06-01,2027-02-28,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,28
+B-05,Corwin household,2 bed,980,2025-06-01,2027-03-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,29
+B-06,Delacroix household,2 bed,980,2025-06-01,2027-04-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,30
+B-07,Easton household,2 bed,980,2025-06-01,2027-05-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,31
+B-08,Farrow household,2 bed,980,2025-06-01,2027-06-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,32
+B-09,Galloway household,2 bed,980,2025-06-01,2027-07-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,33
+B-10,Hargrove household,2 bed,980,2025-06-01,2027-08-31,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,34
+B-11,Iverson household,2 bed,980,2025-06-01,2027-09-30,2050,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,35
+B-12,Jaramillo household,3 bed,1240,2025-06-01,2027-10-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,36
+B-13,Kestrel household,3 bed,1240,2025-06-01,2027-11-30,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,37
+B-14,Langley household,3 bed,1240,2025-06-01,2027-12-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,38
+B-15,Merriweather household,3 bed,1240,2025-06-01,2026-12-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,39
+B-16,Norcross household,3 bed,1240,2025-06-01,2027-01-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",1,40
+B-17,Ostrander household,3 bed,1240,2025-06-01,2027-02-28,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,1
+B-18,Pembrook household,3 bed,1240,2025-06-01,2027-03-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,2
+B-19,Quill household,3 bed,1240,2025-06-01,2027-04-30,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,3
+B-20,Redfern household,3 bed,1240,2025-06-01,2027-05-31,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,4
+B-21,Stroud household,3 bed,1240,2025-06-01,2027-06-30,2595,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,5
+B-22,Rowan household,3 bed townhome,1650,2025-06-01,2026-09-30,3000,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,6
+B-23,Sterling household,3 bed townhome,1650,2025-06-01,2026-10-31,3000,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,7
+B-24,Tamsin household,3 bed townhome,1650,2025-06-01,2026-11-15,3000,occupied,"Tamarind Grove Apartments Rent Roll as of Aug 31, 2026",2,8

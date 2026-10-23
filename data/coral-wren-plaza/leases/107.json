@@ -1,0 +1,29 @@
+{
+  "lease_id": "coral-wren-plaza:107",
+  "property_id": "coral-wren-plaza",
+  "tenant_name": "Pelican Tax & Bookkeeping",
+  "suite_unit": "107",
+  "premises_sf": 1000,
+  "commencement_date": "2022-02-01",
+  "expiration_date": "2027-01-31",
+  "base_rent_monthly": 2150,
+  "rent_schedule": [
+    {
+      "effective_date": "2022-02-01",
+      "base_rent_monthly": 2150
+    }
+  ],
+  "source_document": "Lease, Suite 107, Pelican Tax & Bookkeeping",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2022-02-01: $2,150 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2027-01-31."
+    }
+  ]
+}

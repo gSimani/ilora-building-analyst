@@ -1,0 +1,29 @@
+{
+  "lease_id": "tamarind-grove:B-12",
+  "property_id": "tamarind-grove",
+  "tenant_name": "Jaramillo household",
+  "suite_unit": "B-12",
+  "premises_sf": 1240,
+  "commencement_date": "2025-06-01",
+  "expiration_date": "2027-10-31",
+  "base_rent_monthly": 2595,
+  "rent_schedule": [
+    {
+      "effective_date": "2020-01-01",
+      "base_rent_monthly": 2595
+    }
+  ],
+  "source_document": "Lease, Unit B-12, Jaramillo household",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2020-01-01: $2,595 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2027-10-31."
+    }
+  ]
+}

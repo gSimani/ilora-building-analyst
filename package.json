@@ -1,0 +1,39 @@
+{
+  "name": "ilora-building-analyst",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ILORA.ai Building Analyst: NVIDIA Nemotron on Nebius Token Factory reviews a small commercial real estate portfolio through an MCP server and reports which figures don't add up, with sources.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "npm run build:sim && node --import tsx --watch src/http.ts",
+    "start": "node --import tsx src/http.ts",
+    "sim": "vite simulator",
+    "build:sim": "vite build simulator",
+    "build:lambda": "npm run build:sim && node scripts/build-lambda.mjs",
+    "data": "tsx scripts/generate-demo-data.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-polly": "3.1152.0",
+    "@modelcontextprotocol/ext-apps": "2.0.3",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "cors": "2.8.6",
+    "express": "5.3.0",
+    "serverless-http": "4.0.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.6",
+    "@types/node": "26.6.5",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

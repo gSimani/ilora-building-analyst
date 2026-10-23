@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: ILORA.ai Building Analyst - MCP server (Streamable HTTP) and analyst page on AWS Lambda; NVIDIA Nemotron runs on Nebius Token Factory.
+
+Parameters:
+  Brain:
+    Type: String
+    Default: nemotron
+    AllowedValues: [offline, nemotron]
+    Description: 'Which model picks the tool. nemotron calls NVIDIA Nemotron on Nebius Token Factory (billed per token).'
+  NebiusApiKey:
+    Type: String
+    NoEcho: true
+    Default: ""
+    Description: 'Nebius Token Factory API key, needed when Brain is nemotron.'
+  Voice:
+    Type: String
+    Default: polly
+    AllowedValues: [browser, polly]
+    Description: 'polly reads answers with an Amazon Polly generative voice (billed per character).'
+
+Conditions:
+  UsePolly: !Equals [!Ref Voice, polly]
+
+Resources:
+  McpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .lambda/
+      Handler: index.handler
+      Runtime: nodejs22.x
+      Architectures: [arm64]
+      MemorySize: 512
+      # A portfolio review makes about eight model calls in one turn of the page; each is one request here.
+      Timeout: 30
+      # At most two copies run at once, which bounds what a public URL can spend.
+      ReservedConcurrentExecutions: 2
+      Environment:
+        Variables:
+          ILORA_DATA_DIR: /var/task/data
+          SIMULATOR_DIR: /var/task/simulator
+          BRAIN: !Ref Brain
+          NEBIUS_API_KEY: !Ref NebiusApiKey
+          VOICE: !Ref Voice
+          POLLY_ENGINE: generative
+          POLLY_VOICE: Ruth
+      FunctionUrlConfig:
+        AuthType: NONE
+      Policies:
+        - !If
+          - UsePolly
+          - Statement:
+              - Effect: Allow
+                Action: [polly:SynthesizeSpeech]
+                Resource: "*"
+          - !Ref AWS::NoValue
+
+Outputs:
+  McpEndpoint:
+    Description: MCP Streamable HTTP endpoint
+    Value: !Sub "${McpFunctionUrl.FunctionUrl}mcp"
+  AnalystUrl:
+    Description: ILORA.ai Building Analyst page
+    Value: !GetAtt McpFunctionUrl.FunctionUrl

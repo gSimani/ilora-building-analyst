@@ -1,0 +1,108 @@
+:root {
+  --ground: #f5efe3;
+  --paper: #faf6ec;
+  --paper-2: #e8dfc8;
+  --ink: #0e1418;
+  --body: #2c3236;
+  --muted: #5a5f62;
+  --accent: #0a817d;
+  --accent-soft: #c8eae6;
+  --button: #81d8d0;
+  --button-ink: #0e1418;
+  --rule: #d9cfb8;
+  --device: #1f1a18;
+  --device-ink: #ede6d5;
+  --error: #9d174d;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --ground: #1f1a18;
+  --paper: #241e1c;
+  --paper-2: #2e2724;
+  --ink: #ede6d5;
+  --body: #dcd4c3;
+  --muted: #b3aa98;
+  --accent: #5bbfba;
+  --accent-soft: #23403e;
+  --button: #5bbfba;
+  --button-ink: #0e1418;
+  --rule: #3a322e;
+  --device: #0f0d0c;
+  --device-ink: #ede6d5;
+  --error: #fca5a5;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--ground); color: var(--body); }
+body { font: 17px/1.6 "Tenor Sans", system-ui, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+#top-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 48px; border-bottom: 1px solid var(--rule); }
+#brand { display: flex; align-items: baseline; gap: 12px; }
+#brand-name { font-family: "Fraunces", serif; font-size: 28px; color: var(--ink); }
+#brand-sub { color: var(--muted); font-size: 15px; }
+#controls { display: flex; align-items: center; gap: 16px; font-size: 15px; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; min-height: 44px; }
+.toggle input { accent-color: var(--accent); width: 18px; height: 18px; }
+
+button { font: inherit; cursor: pointer; border: 0; border-radius: 12px; min-height: 44px; padding: 0 18px; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.quiet { background: transparent; color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; padding: 0 4px; }
+
+#stage { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 32px 48px; max-width: 1840px; width: 100%; margin: 0 auto; }
+#stage.with-debug { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+
+#device { background: var(--device); color: var(--device-ink); border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-height: 620px; }
+#device-screen { position: relative; flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px; background: #14181e; border-radius: 16px; padding: 24px; min-height: 440px; }
+#device-screen.voice-only { grid-template-columns: 1fr; }
+#stage.with-debug #device-screen { grid-template-columns: 1fr; }
+#stage.with-debug #conversation { max-height: 260px; }
+#conversation { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; max-height: 520px; padding-right: 4px; }
+.turn { max-width: 52ch; }
+.turn.user { align-self: flex-end; color: #b4bac4; text-align: right; }
+.turn.analyst { color: #f2f3f5; font-size: 19px; }
+.turn .meta { display: block; font-size: 14px; color: #8b93a0; margin-top: 2px; }
+.turn.error { color: var(--error); }
+#visual { min-height: 200px; }
+#visual iframe { width: 100%; border: 0; border-radius: 16px; background: transparent; }
+#visual .placeholder { color: #8b93a0; font-size: 15px; padding: 8px; }
+#no-screen { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; }
+#no-screen-title { font-family: "Fraunces", serif; font-size: 22px; color: #5bbfba; margin: 0; }
+#no-screen-caption { font-size: 22px; max-width: 46ch; margin: 0; color: #f2f3f5; }
+#device-screen.voice-only #conversation { display: none; }
+/* Keep the view loaded and measured while the screen is off, so it is ready when the screen comes back. */
+#device-screen.voice-only #visual { position: absolute; visibility: hidden; pointer-events: none; width: 560px; }
+
+#ask-bar { display: flex; gap: 12px; align-items: center; }
+#talk { background: var(--button); color: var(--button-ink); min-width: 160px; }
+#talk[data-state="listening"] { background: #f5efe3; outline: 2px solid #5bbfba; }
+#type-form { flex: 1; }
+#typed { width: 100%; min-height: 44px; border-radius: 12px; border: 1px solid #3a322e; background: #14181e; color: #f2f3f5; font: inherit; padding: 0 14px; }
+#suggestions { display: flex; flex-wrap: wrap; gap: 8px; }
+#suggestions button { background: transparent; color: #dcd4c3; border: 1px solid #3a322e; font-size: 15px; }
+
+#debug { background: var(--paper); border: 1px solid var(--rule); border-radius: 20px; padding: 20px; overflow: hidden; display: flex; flex-direction: column; max-height: 760px; }
+#debug-head h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 22px; color: var(--ink); margin: 0; }
+#session-info { margin: 4px 0 12px; color: var(--muted); font-size: 15px; }
+#wire { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+#wire li { border-top: 1px solid var(--rule); padding-top: 8px; }
+#wire details summary { cursor: pointer; font-size: 15px; color: var(--ink); min-height: 32px; }
+#wire .dir { color: var(--accent); margin-right: 6px; }
+#wire pre { margin: 6px 0 0; font-size: 14px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; color: var(--body); max-height: 280px; overflow: auto; }
+
+#foot { padding: 16px 48px 28px; color: var(--muted); font-size: 15px; }
+#foot-note { max-width: 75ch; margin: 0; }
+
+@media (max-width: 900px) {
+  #top-bar, #stage, #foot { padding-left: 24px; padding-right: 24px; }
+  #stage.with-debug { grid-template-columns: 1fr; }
+  #device-screen { grid-template-columns: 1fr; }
+  #top-bar { flex-wrap: wrap; }
+}
+
+#review-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px 0; }
+#review { background: var(--button); color: var(--button-ink); border: 0; border-radius: 10px; min-height: 44px; padding: 0 18px; font: inherit; cursor: pointer; }
+#review:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#review-hint { color: var(--device-ink); opacity: .85; font-size: 15px; }
+.turn { white-space: pre-line; }

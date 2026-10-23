@@ -1,0 +1,10 @@
+process.env.ILORA_DATA_DIR = process.argv[2] + "/data"; process.env.SIMULATOR_DIR = process.argv[2] + "/simulator";
+const { handler } = await import("file:///" + process.argv[2] + "/index.mjs");
+const ev = (method, path, body) => ({ version: "2.0", rawPath: path, rawQueryString: "", headers: { "content-type": "application/json", accept: "application/json, text/event-stream", host: "x.lambda-url.us-east-1.on.aws", "mcp-protocol-version": "2025-11-25" }, requestContext: { http: { method, path, sourceIp: "1.2.3.4" }, domainName: "x.lambda-url.us-east-1.on.aws" }, body: body ? JSON.stringify(body) : undefined, isBase64Encoded: false });
+let t = performance.now();
+let r = await handler(ev("POST", "/mcp", { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-11-25", capabilities: {}, clientInfo: { name: "t", version: "1" } } }), {});
+console.log("init", r.statusCode, Math.round(performance.now() - t) + "ms", String(r.body).slice(0, 80));
+t = performance.now();
+r = await handler(ev("POST", "/mcp", { jsonrpc: "2.0", id: 2, method: "tools/call", params: { name: "check_rent_roll_vs_statement", arguments: { property: "coral wren" } } }), {});
+console.log("call", r.statusCode, Math.round(performance.now() - t) + "ms", String(r.body).slice(0, 120));
+r = await handler(ev("GET", "/", null), {}); console.log("sim", r.statusCode, String(r.body).slice(0, 40));

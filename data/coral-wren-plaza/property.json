@@ -1,0 +1,18 @@
+{
+  "property_id": "coral-wren-plaza",
+  "name": "Coral Wren Plaza",
+  "property_type": "Neighborhood retail center",
+  "city": "Delray Beach",
+  "state": "FL",
+  "units_label": "suites",
+  "unit_count": 12,
+  "total_square_feet": 19000,
+  "occupancy_basis": "leased square feet",
+  "as_of_date": "2026-08-31",
+  "period_start": "2025-09-01",
+  "period_end": "2026-08-31",
+  "rental_account_codes": [
+    "4000"
+  ],
+  "fictional": true
+}

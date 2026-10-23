@@ -1,0 +1,18 @@
+{
+  "property_id": "tamarind-grove",
+  "name": "Tamarind Grove Apartments",
+  "property_type": "Garden apartments",
+  "city": "Boynton Beach",
+  "state": "FL",
+  "units_label": "units",
+  "unit_count": 48,
+  "total_square_feet": 47750,
+  "occupancy_basis": "occupied units",
+  "as_of_date": "2026-08-31",
+  "period_start": "2025-09-01",
+  "period_end": "2026-08-31",
+  "rental_account_codes": [
+    "4000"
+  ],
+  "fictional": true
+}

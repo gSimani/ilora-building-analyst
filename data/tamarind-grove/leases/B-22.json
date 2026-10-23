@@ -1,0 +1,29 @@
+{
+  "lease_id": "tamarind-grove:B-22",
+  "property_id": "tamarind-grove",
+  "tenant_name": "Rowan household",
+  "suite_unit": "B-22",
+  "premises_sf": 1650,
+  "commencement_date": "2025-06-01",
+  "expiration_date": "2026-09-30",
+  "base_rent_monthly": 3000,
+  "rent_schedule": [
+    {
+      "effective_date": "2020-01-01",
+      "base_rent_monthly": 3000
+    }
+  ],
+  "source_document": "Lease, Unit B-22, Rowan household",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2020-01-01: $3,000 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2026-09-30."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "lease_id": "coral-wren-plaza:108",
+  "property_id": "coral-wren-plaza",
+  "tenant_name": "Saltwater Sushi Bar",
+  "suite_unit": "108",
+  "premises_sf": 1800,
+  "commencement_date": "2021-04-01",
+  "expiration_date": "2031-03-31",
+  "base_rent_monthly": 3600,
+  "rent_schedule": [
+    {
+      "effective_date": "2021-04-01",
+      "base_rent_monthly": 3600
+    }
+  ],
+  "source_document": "Lease, Suite 108, Saltwater Sushi Bar",
+  "source_citations": [
+    {
+      "field": "rent_schedule",
+      "page": 3,
+      "quote": "Beginning 2021-04-01: $3,600 per month"
+    },
+    {
+      "field": "expiration_date",
+      "page": 1,
+      "quote": "The Term shall expire on 2031-03-31."
+    }
+  ]
+}

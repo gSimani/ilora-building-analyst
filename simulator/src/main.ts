@@ -219,20 +219,47 @@ async function showVisual(toolName: string, result: CallToolResult) {
 
 // ------------------------------------------------------------------ voice
 
-let audio: HTMLAudioElement | undefined;
+// One audio element for the whole session. Browsers only let a page start sound right after a
+// click or key press, and an answer arrives seconds later; so the element is unlocked on the
+// press itself and then reused for every answer. Without this the play call is refused and the
+// page used to fall back to the robotic built-in browser voice.
+const player = new Audio();
+const SILENCE = "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//tQxAADB8AhSmxhIIEVCSiJrDCQBTcu3UrAIwUdkRgQbFAZC1CQEwTJ9mjRvBA4UOLD8nKVOWfh+UlK3z/177OXrfOdKl7pyn3Xf//WreyTRUoAWgBgkOAGbZHBgG1OF6zM82DWbZaUmMBptgQhGjsyYqc9ae9XFz280948NMBWInljyzsNRFLPWdnZGWrddDsjK1unuSrVN9jJsK8KuQtQCtMBjCEtImISdNKJOopIpBFpNSMbIHCSRpRR5iakjTiyzLhchUUBwCgyKiweBv/7UsQbg8isVNoMPMjAAAA0gAAABEVFGmgqK////9bP/6XCykxBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+let unlocked = false;
+function unlockAudio() {
+  if (unlocked) return;
+  unlocked = true;
+  player.src = SILENCE;
+  player.play().catch(() => (unlocked = false));
+}
+addEventListener("pointerdown", unlockAudio, { capture: true });
+addEventListener("keydown", unlockAudio, { capture: true });
+
 async function speak(text: string) {
-  audio?.pause();
+  player.pause();
   speechSynthesis.cancel();
+  let r: Response | undefined;
   try {
-    const r = await fetch("/api/speak", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
-    if (r.status === 200) {
-      audio = new Audio(URL.createObjectURL(await r.blob()));
-      await audio.play();
-      return;
-    }
+    r = await fetch("/api/speak", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
   } catch {
-    /* fall through to the browser voice */
+    r = undefined;
   }
+  if (r?.status === 200) {
+    player.src = URL.createObjectURL(await r.blob());
+    try {
+      await player.play();
+    } catch {
+      // Still refused (no click yet this session): offer a button rather than a different voice.
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "quiet";
+      btn.textContent = "Play answer";
+      btn.onclick = () => { btn.remove(); void player.play(); };
+      $("conversation").lastElementChild?.append(btn);
+    }
+    return;
+  }
+  // The server has no voice switched on (status 204), so use the browser's own voice.
   const u = new SpeechSynthesisUtterance(text);
   u.rate = 1.02;
   speechSynthesis.speak(u);

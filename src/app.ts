@@ -55,6 +55,13 @@ export function createApp(extra?: (app: Express) => void): Express {
 
   // The built simulator (npm run build), served from the same origin as /mcp.
   const sim = process.env.SIMULATOR_DIR ?? join(import.meta.dirname, "..", "simulator", "dist");
-  if (existsSync(sim)) app.use(express.static(sim));
+  // The page itself is never cached, so a redeploy always loads the matching script; the hashed
+  // assets it points to can be cached for as long as the browser likes.
+  if (existsSync(sim))
+    app.use(
+      express.static(sim, {
+        setHeaders: (res, path) => res.setHeader("Cache-Control", path.endsWith(".html") ? "no-cache" : "public, max-age=31536000, immutable"),
+      }),
+    );
   return app;
 }

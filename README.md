@@ -96,7 +96,7 @@ npm run build:lambda
 sam deploy --guided --template-file template.yaml
 ```
 
-Stack parameters: `Brain` (`nemotron` or `offline`), `NebiusApiKey`, `Voice` (`polly` or `browser`). At most two copies run at once, and `/api/brain` and `/api/speak` cap requests per hour per caller and in total. Remove everything with `sam delete`.
+Stack parameters: `Brain` (`nemotron` or `offline`), `NebiusApiKey`, `Voice` (`polly` or `browser`). `/api/brain` and `/api/speak` cap requests per hour per caller and in total, which bounds what a public URL can spend. Remove everything with `sam delete`.
 
 ## Project layout
 

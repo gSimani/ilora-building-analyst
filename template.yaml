@@ -33,8 +33,8 @@ Resources:
       MemorySize: 512
       # A portfolio review makes about eight model calls in one turn of the page; each is one request here.
       Timeout: 30
-      # At most two copies run at once, which bounds what a public URL can spend.
-      ReservedConcurrentExecutions: 2
+      # No reserved concurrency: the account's spare capacity is at its minimum. Spending is bounded by the
+      # per-caller and total hourly caps on /api/brain and /api/speak instead.
       Environment:
         Variables:
           ILORA_DATA_DIR: /var/task/data

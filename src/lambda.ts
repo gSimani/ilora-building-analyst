@@ -23,7 +23,9 @@ type UrlEvent = {
 };
 type UrlResult = { statusCode: number; headers: Record<string, string>; body: string; isBase64Encoded?: boolean };
 
-const express = serverless(createApp(mountAssistant));
+// Audio and images must go back base64-encoded; sent as text, the MP3 from Polly arrived
+// corrupted and the browser could not play it.
+const express = serverless(createApp(mountAssistant), { binary: ["audio/*", "image/*", "font/*"] });
 const CORS = {
   "access-control-allow-origin": process.env.CORS_ORIGINS ?? "*",
   "access-control-allow-headers": "Content-Type, Accept, Mcp-Session-Id, Mcp-Protocol-Version, Last-Event-ID",
